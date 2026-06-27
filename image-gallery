@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Image Gallery</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    margin:0;
+    padding:20px;
+    background:#111827; /* ONLY CHANGED BACKGROUND */
+    color:white;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* ONLY BUTTON COLOR CHANGED */
+button{
+    padding:10px 18px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    background:#f97316; /* ORANGE */
+    color:white;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ea580c;
+    transform:scale(1.05);
+}
+
+/* NOTHING ELSE CHANGED */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.image img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.image img:hover{
+    transform:scale(1.05);
+}
+
+/* Lightbox unchanged */
+.lightbox{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+}
+
+.lightbox img{
+    max-width:80%;
+    max-height:80%;
+    border-radius:10px;
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:40px;
+    color:white;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>📸 Image Gallery project</h1>
+
+<!-- Buttons -->
+<div style="text-align:center;">
+<button onclick="filter('all')">All</button>
+<button onclick="filter('animals')">Animals</button>
+<button onclick="filter('birds')">Birds</button>
+<button onclick="filter('nature')">Nature</button>
+<button onclick="filter('city')">City</button>
+</div>
+
+<div class="gallery">
+
+<!-- Animals -->
+<div class="image animals"><img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=600"></div>
+<div class="image animals"><img src="https://images.unsplash.com/photo-1552410260-0fd9b577afa6?w=600"></div>
+<div class="image animals">
+    <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=600" alt="Swan">
+</div>
+<div class="image animals">
+    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600" alt="Cute Owl">
+</div>
+<!-- Birds -->
+
+<div class="image birds">
+<img src="https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?w=600" alt="Bird">
+</div>
+
+
+<div class="image birds">
+<img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600" alt="Macaw Parrot">
+</div>
+
+<div class="image birds">
+    <img src="https://images.unsplash.com/photo-1551085254-e96b210db58a?w=600" alt="Hummingbird">
+</div>
+
+<div class="image birds"><img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=600"></div>
+
+<!-- Nature -->
+
+<div class="image nature">
+    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=600" alt="Flamingo">
+</div>
+
+<div class="image nature"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600"></div>
+<div class="image nature"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600"></div>
+
+<!-- City -->
+<div class="image city"><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600"></div>
+<div class="image city"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600"></div>
+<div class="image city">
+    <img src="https://images.unsplash.com/photo-1550850839-8dc894ed385a?w=600" alt="Toucan">
+</div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+<span class="close" onclick="closeBox()">×</span>
+<img id="bigImg">
+</div>
+
+<script>
+
+const images=document.querySelectorAll(".image");
+
+function filter(type){
+images.forEach(img=>{
+if(type==="all" || img.classList.contains(type)){
+img.style.display="block";
+}else{
+img.style.display="none";
+}
+});
+}
+
+// lightbox
+document.querySelectorAll(".image img").forEach(img=>{
+img.onclick=function(){
+document.getElementById("lightbox").style.display="flex";
+document.getElementById("bigImg").src=this.src;
+}
+});
+
+function closeBox(){
+document.getElementById("lightbox").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
